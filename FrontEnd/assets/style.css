@@ -75,6 +75,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
+	margin-top: 10px;
 ;
 }
 
@@ -93,6 +94,24 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	color:#000000;
+}
+nav ul li a {
+    text-decoration: none; /* Supprime le soulignement */
+    color: #000000;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 5px 10px;
+}
+/* reduction de la taille du pictogramme instagram page index.html */
+nav ul li img {
+    width: 22px;  /* Largeur */
+    height: 22px; /* Hauteur */
+}
+/* reduction de la taille du pictogramme instagram page login.html */
+nav ul li a img {
+    width: 22px;
+    height: 22px;
 }
 
 li:hover {
@@ -186,3 +205,105 @@ footer nav ul {
 	margin: 2em
 }
 
+/* === Ajout Styles des filtres de catégorie === */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+	font-family: 'Syne';
+    border: 2px solid #1D6154;
+    background-color: transparent;
+    color: #1D6154;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.filter-btn:hover {
+    background-color: #1D6154;
+    color: white;
+}
+
+.filter-btn.active {
+    background-color: #1D6154;
+    color: white;
+}
+/* === Styles de la page de connexion === */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+
+.login-container h2 {
+    font-family: 'Syne';
+    font-size: 24px;
+    color: #1D6154;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+}
+
+.login-form label {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.login-btn {
+    background-color: #1D6154;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-btn:hover {
+    background-color: #144d3a;
+}
+
+.forgot-password {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    color: #1D6154;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+/* === Rendre le message d'erreur visible === */
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}

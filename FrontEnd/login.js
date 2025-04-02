@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (response.ok) {
                     localStorage.setItem("authToken", data.token);
-                    console.log("Token stocké :", data.token); // ← affiché une seule fois
+                    console.log("Token stocké :", data.token); // affiché une seule fois
                     window.location.href = "index.html";
                 } else {
-                    document.querySelector(".error").textContent = "Identifiants invalides.";
+                    document.querySelector(".error-message").textContent = "Identifiant ou mot de passe invalide.";
                 }
 
             } catch (error) {

@@ -301,7 +301,7 @@ footer nav ul {
 .forgot-password:hover {
     text-decoration: underline;
 }
-/* Message d'erreur visiblesi login et/ou mdp erroné(s) */
+/* Message d'erreur visible si login et/ou mdp erroné(s) */
 .error-message {
     color: red;
     text-align: center;
@@ -358,5 +358,119 @@ html {
 	color: #000;
 	cursor: pointer;
 	position: relative;
-  top: -5px; /* Aligner le bouton au titre */
+    top: -5px; /* Aligner le bouton au titre */
+  }
+
+  /* Fenêtre modale : fond sombre semi-transparent */
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8); /* effet sombre */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/*z-index: 1000;*/
+  }
+  
+  /* Contenu central de la modale */
+  .modal-content {
+	overflow: auto;
+	background-color: #fff;
+	padding: 20px;
+	width: 630px;
+	height: 688px;
+	max-height: 700px;
+	border-radius: 10px;
+	position: relative;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Bouton de fermeture (croix) */
+  .close-modal {
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	font-size: 24px;
+	color: #333;
+	cursor: pointer;
+  }
+  
+  /* Cacher la modale par défaut avec display none */
+  .hidden {
+	display: none;
+  }
+  /* Style Galerie photo de la modale */
+  .gallery-modal-page1 h3 {
+	
+	display: flex;
+	justify-content: center;
+	padding: 50px;
+	font-size: 26px;
+	color: #000000;
+  }
+
+  .form-btn-open {
+	background-color: #2E6153; /* vert foncé */
+	color: white;
+	font-size: 16px;
+	font-family: Syne;
+	font-weight: bold;
+	border: none;
+	border-radius: 60px; /* arrondi comme sur la maquette */
+	padding: 13px 32px;
+	cursor: pointer;
+	margin: 32px auto 0;
+	display: block;
+	text-align: center;
+	width: 237px;
+	Height: 42px;
+	/*Left: 600px;
+	Top: 1267px;*/
+  }
+  
+  .btn-ajouter-photo:hover {
+	background-color: #264E44; /* couleur plus foncée au survol */
+  }
+
+  /* Style 2 eme page de la modale */
+
+  .header-modal {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+  }
+  
+  /*.return-gallery {
+	background: none;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+  }*/
+  /*.form-modal-page2 {
+	position: relative;
+  }*/
+  
+  /* Flèche de retour */
+  .return-gallery {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	background: none;
+	border: none;
+	font-size: 25px;
+	color: #333;
+	cursor: pointer;
+	padding: 0;
+  }
+
+ .form-modal-page2 h3 {
+	
+	margin: 0 auto;
+	padding: 50px;
+	font-size: 26px;
+	color: #000000;
   }

@@ -94,7 +94,7 @@ function filterWorks(category) {
     }
 }
 
-// Ajoute des événements aux boutons de filtre
+// Ajout des événements aux boutons de filtre
 function addFilterEventListeners() {
     const buttons = document.querySelectorAll(".filter-btn");
     buttons.forEach(button => {
@@ -111,6 +111,7 @@ function addFilterEventListeners() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    let modifierBtn; // declaration variable vide
     const token = localStorage.getItem("authToken"); //Vérifier si l'user est connecté
     if (token) {
         console.log("L'utilisateur est connecté : affichage du mode admin"); // token stocké dans localstorage, on ajoute le bandeau noir et le bouton "modifier"
@@ -158,7 +159,8 @@ if (mesProjetsTitre) {
     mesProjetsTitre.replaceWith(portfolioHeader);
 
     // Création du bouton
-    const modifierBtn = document.createElement('button');
+    //const modifierBtn = document.createElement('button');
+    modifierBtn = document.createElement('button');
     modifierBtn.classList.add('modifier-btn');
     modifierBtn.innerHTML = '<i class="fa-regular fa-pen-to-square"></i> modifier';
 
@@ -166,6 +168,60 @@ if (mesProjetsTitre) {
     portfolioHeader.appendChild(titreClone);
     portfolioHeader.appendChild(modifierBtn);
 }
+
+// Gestion ouverture et fermeture de la modale
+//const modifierBtn = document.querySelector(".modifier-btn"); // bouton "modifier"
+const modal = document.querySelector(".modal"); // la modale
+const closeBtn = document.querySelector(".close-modal"); // la croix de fermeture
+
+// Ouvrir la premiere page de la modale
+ //if (modifierBtn && modal) {
+    modifierBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+
+// Ouvrir la deuxième page de la modale
+const page1 = document.querySelector('.gallery-modal-page1');
+const page2 = document.querySelector('.form-modal-page2');
+const btnToForm = document.querySelector('.form-btn-open');
+const returnBtn = document.querySelector('.return-gallery');
+
+if (btnToForm && page1 && page2) {
+    btnToForm.addEventListener('click', () => {
+        page1.classList.add('hidden');
+        page2.classList.remove('hidden');
+    });
+}
+if (returnBtn && page1 && page2) {
+    returnBtn.addEventListener('click', () => { // on clique sur le btn retour
+        page2.classList.add('hidden'); // on masque la page2
+        page1.classList.remove('hidden'); // on revient sur la page1
+    });
+}
+
+});
+
+
+// Fermer la modale via la croix
+if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+}
+
+// Fermer la modale en cliquant hors de la modale
+window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.classList.add("hidden");
+    }
+});
+
+// Fermer la modale en cliquant sur la touche Esc
+window.addEventListener("keydown", (e) => { // lorsqu'on appuie sur la touche Esc
+    console.log("Touche appuyée :", e.key);
+    if (e.key === "Escape") {
+        modal.classList.add("hidden");
+    }
+});
 
     }
 

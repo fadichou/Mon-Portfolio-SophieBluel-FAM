@@ -1,42 +1,43 @@
-function fetchWorks() {
-    fetch("http://localhost:5678/api/works")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erreur lors de la récupération des travaux.");
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Données récupérées :", data);
-            allWorks = data; // Stocker les travaux pour les filtres
-            displayWorks(data); // Afficher les travaux
-            generateFilters(data); // Générer les filtres
-        })
-        .catch(error => console.error("Erreur :", error));
-}
+// function fetchWorks() {
+//     fetch("http://localhost:5678/api/works")
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error("Erreur lors de la récupération des travaux.");
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             console.log("Données récupérées :", data);
+//             allWorks = data; // Stocker les travaux pour les filtres
+//             displayWorks(data); // Afficher les travaux sur la page d'acceuil
+//             afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
+//             generateFilters(data); // Générer les filtres
+//         })
+//         .catch(error => console.error("Erreur :", error));
+// }
 // Fonction pour afficher dynamiquement les travaux dans la galerie
-function displayWorks(works) {
+function displayWorks(projets) {
     const gallery = document.querySelector(".gallery"); // Sélectionne la galerie
     if (!gallery) {
         console.error("Élément .gallery non trouvé dans le DOM !");
         return;
     }
-
     gallery.innerHTML = ""; // Nettoie la galerie avant d'ajouter les projets
 
     console.log("Affichage des travaux..."); // Vérification
 
-    works.forEach(work => {
-        console.log("Ajout du projet :", work.title, "URL:", work.imageUrl); //images, titre et image url venant de API backend get/api/works
+    projets.forEach(projet => {
+        console.log("Ajout du projet :", projet.title, "URL:", projet.imageUrl); //images, titre et image url venant de API backend get/api/works
 
         const figure = document.createElement("figure");
+        figure.setAttribute("data-id", projet.id);
 
         const img = document.createElement("img");
-        img.src = work.imageUrl;
-        img.alt = work.title;
+        img.src = projet.imageUrl;
+        img.alt = projet.title;
 
         const caption = document.createElement("figcaption");
-        caption.textContent = work.title;
+        caption.textContent = projet.title;
 
         // Ajouter les éléments à la galerie
         figure.appendChild(img);
@@ -111,6 +112,7 @@ function addFilterEventListeners() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    fetchWorks(); // Appel de la fonction Fetchworks
     let modifierBtn; // declaration variable vide
     const token = localStorage.getItem("authToken"); //Vérifier si l'user est connecté
     if (token) {
@@ -170,12 +172,10 @@ if (mesProjetsTitre) {
 }
 
 // Gestion ouverture et fermeture de la modale
-//const modifierBtn = document.querySelector(".modifier-btn"); // bouton "modifier"
 const modal = document.querySelector(".modal"); // la modale
 const closeBtn = document.querySelector(".close-modal"); // la croix de fermeture
 
 // Ouvrir la premiere page de la modale
- //if (modifierBtn && modal) {
     modifierBtn.addEventListener("click", () => {
         modal.classList.remove("hidden");
 
@@ -186,20 +186,19 @@ const btnToForm = document.querySelector('.form-btn-open');
 const returnBtn = document.querySelector('.return-gallery');
 
 if (btnToForm && page1 && page2) {
-    btnToForm.addEventListener('click', () => {
-        page1.classList.add('hidden');
-        page2.classList.remove('hidden');
+    btnToForm.addEventListener('click', () => { // on clique sur le btn Ajouter une photo
+        page1.classList.add('hidden'); // alors on masque la page1
+        page2.classList.remove('hidden'); // et on arrive sur la page2
     });
 }
 if (returnBtn && page1 && page2) {
     returnBtn.addEventListener('click', () => { // on clique sur le btn retour
         page2.classList.add('hidden'); // on masque la page2
-        page1.classList.remove('hidden'); // on revient sur la page1
+        page1.classList.remove('hidden'); // et on revient sur la page1
     });
 }
 
 });
-
 
 // Fermer la modale via la croix
 if (closeBtn && modal) {
@@ -222,8 +221,111 @@ window.addEventListener("keydown", (e) => { // lorsqu'on appuie sur la touche Es
         modal.classList.add("hidden");
     }
 });
+}
+// éléments de la boîte de confirmation
+const popup = document.querySelector(".confirmation-suppression");
+const btnConfirmer = document.querySelector(".btn-confirmer");
+const btnAnnuler = document.querySelector(".btn-annuler");
 
+let projetASupprimer = null;
+let elementDOMaRetirer = null;
+
+function afficherPopupSuppression(idProjet, elementDOM) {
+  popup.classList.remove("hidden");
+  projetASupprimer = idProjet;
+  elementDOMaRetirer = elementDOM;
+}
+
+btnAnnuler.addEventListener("click", () => {
+  popup.classList.add("hidden");
+});
+
+btnConfirmer.addEventListener("click", () => {
+  supprimerProjet(projetASupprimer, elementDOMaRetirer);
+  popup.classList.add("hidden");
+});
+
+    function afficherWorksModalep1(works) {
+        const page1Modale = document.querySelector(".projets-modale-page1");
+        if (!page1Modale) {
+            console.error("Zone .projets-modale-page1 introuvable !");
+            return;
+        }
+    
+        page1Modale.innerHTML = ""; // Vider la zone à chaque ouverture
+    
+        works.forEach(projet => {
+            // Créer l’élément figure
+            const ProjetPhoto = document.createElement("figure");
+            ProjetPhoto.classList.add("vignette-modale");
+    
+            // Image
+            const image = document.createElement("img");
+            image.src = projet.imageUrl;
+            image.alt = projet.title;
+            image.classList.add("image-vignette");
+    
+            // Icône poubelle
+            const iconePoubelle = document.createElement("i");
+            iconePoubelle.classList.add("fa-solid", "fa-trash-can", "icone-supprimer");
+            iconePoubelle.dataset.id = projet.id;
+            // Ajouter l'écouteur d'événement au clic
+    iconePoubelle.addEventListener("click", () => {
+        afficherPopupSuppression(projet.id, ProjetPhoto);
+      });
+    
+            // Ajout dans figure
+            ProjetPhoto.appendChild(image);
+            ProjetPhoto.appendChild(iconePoubelle);
+    
+            // Ajout dans la zone
+            page1Modale.appendChild(ProjetPhoto);
+        });
+    }
+    function fetchWorks() {
+        fetch("http://localhost:5678/api/works")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la récupération des travaux.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Données récupérées :", data);
+                allWorks = data; // Stocker les travaux pour les filtres
+                displayWorks(data); // Afficher les travaux sur la page d'acceuil
+                afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
+                generateFilters(data); // Générer les filtres
+            })
+            .catch(error => console.error("Erreur :", error));
     }
 
-    fetchWorks(); // Appel de la fonction Fetchworks
+    //fetchWorks();
+    // Suppression photo de la modale
+    function supprimerProjet(id, elementDOM) {
+        const token = localStorage.getItem("authToken");
+      
+        fetch(`http://localhost:5678/api/works/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              // Supprimer l’élément du DOM
+              elementDOM.remove();
+              // Supprimer aussi la vignette sur la page d’accueil
+            const vignetteAccueil = document.querySelector(`[data-id='${id}']`);
+            if (vignetteAccueil) {
+            vignetteAccueil.remove();
+            }
+            } else {
+              alert("La suppression a échoué.");
+            }
+          })
+          .catch(error => {
+            console.error("Erreur lors de la suppression :", error);
+          });
+      }
 });

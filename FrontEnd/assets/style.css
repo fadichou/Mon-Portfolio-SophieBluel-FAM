@@ -379,7 +379,7 @@ html {
   .modal-content {
 	overflow: auto;
 	background-color: #fff;
-	padding: 20px;
+	/*padding: 20px;*/
 	width: 630px;
 	height: 688px;
 	max-height: 700px;
@@ -407,33 +407,29 @@ html {
 	
 	display: flex;
 	justify-content: center;
-	padding: 50px;
+	padding: 20px;
+	margin-top: 40px;
 	font-size: 26px;
 	color: #000000;
   }
 
   .form-btn-open {
-	background-color: #2E6153; /* vert foncé */
+	background-color: #2E6153;
 	color: white;
 	font-size: 16px;
 	font-family: Syne;
 	font-weight: bold;
 	border: none;
-	border-radius: 60px; /* arrondi comme sur la maquette */
-	padding: 13px 32px;
-	cursor: pointer;
+	border-radius: 60px; /* bord arrondi*/
 	margin: 32px auto 0;
 	display: block;
-	text-align: center;
 	width: 237px;
-	Height: 42px;
-	/*Left: 600px;
-	Top: 1267px;*/
+	Height: 36px;
   }
   
-  .btn-ajouter-photo:hover {
+  /*.btn-ajouter-photo:hover {
 	background-color: #264E44; /* couleur plus foncée au survol */
-  }
+  /*}*/
 
   /* Style 2 eme page de la modale */
 
@@ -444,15 +440,6 @@ html {
 	margin-bottom: 1rem;
   }
   
-  /*.return-gallery {
-	background: none;
-	border: none;
-	font-size: 1.5rem;
-	cursor: pointer;
-  }*/
-  /*.form-modal-page2 {
-	position: relative;
-  }*/
   
   /* Flèche de retour */
   .return-gallery {
@@ -473,4 +460,112 @@ html {
 	padding: 50px;
 	font-size: 26px;
 	color: #000000;
+  }
+
+  /* Grille de la galerie page 1 de la modale  */
+
+  .projets-modale-page1 {
+	display: flex;
+	flex-wrap: wrap; /*retour à la ligne */
+	justify-content: center;
+	gap: 20px 15px;
+	padding: 40px;
+	margin-bottom: 25px;
+	align-items: center;
+	justify-content: space-between;
+  }
+  
+  /* Vignette */
+.vignette-modale {
+	position: relative;
+	width: 80px;   /* taille fixe pour caler 5 vignettes par ligne */
+	height: 105px;
+	background-color: #f5f5f5;
+	/*border-radius: 6px;*/
+	/*overflow: hidden;*/
+	flex: 0 0 auto; /* empêche de s'étirer */
+  }
+  
+  /* Image dans la vignette */
+.vignette-modale img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+  }
+  
+  /* Icône poubelle */
+  .icone-supprimer {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: white;
+	background-color: black;
+	padding: 5px;
+	border-radius: 3px;
+	font-size: 12px;
+	cursor: pointer;
+  }
+  
+  .icone-supprimer:hover {
+	background-color: red;
+  }
+  .ligne-hori-modale {
+	border: none;
+	height: 1px;
+	background-color: #b3b3b3; /* gris clair */
+	margin: 30px auto;
+	width: 80%;
+  }
+/* Style pop up confirmation Arrière-plan semi-transparent */
+.confirmation-suppression {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+  }
+  
+  /* Boîte de confirmation */
+  .popup-confirmation {
+	background-color: white;
+	padding: 20px 30px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	text-align: center;
+  }
+  
+  /* Boutons */
+  .boutons-confirmation {
+	margin-top: 15px;
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+  }
+  
+  .btn-annuler,
+  .btn-confirmer {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+  }
+  
+  .btn-annuler {
+	background-color: #ccc;
+  }
+  
+  .btn-confirmer {
+	background-color: #d9534f;
+	color: white;
+  }
+  
+  /* Cachée par défaut */
+  .hidden {
+	display: none;
   }

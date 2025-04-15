@@ -76,8 +76,11 @@
 	  <div class="modal-body-page">
 		<!-- Modale Première page : contenu galerie à compléter plus tard  -->
 		<div class="gallery-modal-page1">
-			<h3>Galerie photo</h3>
-		  <p>Test première page de la modale : galerie pour ajout et suppression photos</p>
+			<h3>Galerie photo</h3>	
+      <div class="projets-modale-page1"></div><!--pour injecter les projets dynamiquement -->
+		  <!-- <p>Test première page de la modale : galerie pour ajout et suppression photos</p> -->
+		   <!-- Barre de séparation -->
+  <hr class="ligne-hori-modale">
 		  <button class="form-btn-open">Ajouter une photo</button>
 		</div>
 	  
@@ -94,6 +97,17 @@
 	  </div>
 	</div>
   </div>
+<!-- Fenêtre de confirmation suppression pour la page1 modale-->
+<div class="confirmation-suppression hidden">
+	<div class="popup-confirmation">
+	  <p>Voulez-vous vraiment supprimer cette photo ?</p>
+	  <div class="boutons-confirmation">
+		<button class="btn-annuler">Annuler</button>
+		<button class="btn-confirmer">Oui, supprimer</button>
+	  </div>
+	</div>
+  </div>
+
 <!-- Lier fichier categories.js à index.html pour la galerie et les filtres -->
 <script src="categories.js"></script> 
 </body>

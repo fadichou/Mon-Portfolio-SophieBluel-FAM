@@ -7,7 +7,7 @@
 //             return response.json();
 //         })
 //         .then(data => {
-//             console.log("Données récupérées :", data);
+//             if (DEBUG) console.log("Données récupérées :", data);
 //             allWorks = data; // Stocker les travaux pour les filtres
 //             displayWorks(data); // Afficher les travaux sur la page d'acceuil
 //             afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
@@ -15,6 +15,10 @@
 //         })
 //         .catch(error => console.error("Erreur :", error));
 // }
+
+// Activer (true) ou désactiver (false) les logs développeur
+const DEBUG = true;
+
 // Fonction pour afficher dynamiquement les travaux dans la galerie
 function displayWorks(projets) {
     const gallery = document.querySelector(".gallery"); // Sélectionne la galerie
@@ -24,10 +28,10 @@ function displayWorks(projets) {
     }
     gallery.innerHTML = ""; // Nettoie la galerie avant d'ajouter les projets
 
-    console.log("Affichage des travaux..."); // Vérification
+    if (DEBUG) console.log("Affichage des travaux..."); // Vérification
 
     projets.forEach(projet => {
-        console.log("Ajout du projet :", projet.title, "URL:", projet.imageUrl); //images, titre et image url venant de API backend get/api/works
+        if (DEBUG) console.log("Ajout du projet :", projet.title, "URL:", projet.imageUrl); //images, titre et image url venant de API backend get/api/works
 
         const figure = document.createElement("figure");
         figure.setAttribute("data-id", projet.id);
@@ -45,7 +49,7 @@ function displayWorks(projets) {
         gallery.appendChild(figure);
     });
 
-    console.log("Tous les travaux ont été ajoutés!");
+    if (DEBUG) console.log("Tous les travaux ont été ajoutés!");
 }
 // Fonction pour générer dynamiquement les boutons de filtre
 function generateFilters(works) {
@@ -116,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let modifierBtn; // declaration variable vide
     const token = localStorage.getItem("authToken"); //Vérifier si l'user est connecté
     if (token) {
-        console.log("L'utilisateur est connecté : affichage du mode admin"); // token stocké dans localstorage, on ajoute le bandeau noir et le bouton "modifier"
+        if (DEBUG) console.log("L'utilisateur est connecté : affichage du mode admin"); // token stocké dans localstorage, on ajoute le bandeau noir et le bouton "modifier"
    
         // Création du bandeau noir en haut de page
    const adminBanner = document.createElement("div"); //creation variable adminbanner avec nouvel element div pour icone crayon et texte mode edition
@@ -216,7 +220,7 @@ window.addEventListener("click", (event) => {
 
 // Fermer la modale en cliquant sur la touche Esc
 window.addEventListener("keydown", (e) => { // lorsqu'on appuie sur la touche Esc
-    console.log("Touche appuyée :", e.key);
+    if (DEBUG) console.log("Touche appuyée :", e.key);
     if (e.key === "Escape") {
         modal.classList.add("hidden");
     }
@@ -291,7 +295,7 @@ btnConfirmer.addEventListener("click", () => {
                 return response.json();
             })
             .then(data => {
-                console.log("Données récupérées :", data);
+                if (DEBUG) console.log("Données récupérées :", data);
                 allWorks = data; // Stocker les travaux pour les filtres
                 displayWorks(data); // Afficher les travaux sur la page d'acceuil
                 afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
@@ -319,6 +323,7 @@ btnConfirmer.addEventListener("click", () => {
             const vignetteAccueil = document.querySelector(`[data-id='${id}']`);
             if (vignetteAccueil) {
             vignetteAccueil.remove();
+            if (DEBUG) console.log(`Projet avec l'ID ${id} supprimé avec succès.`);
             }
             } else {
               alert("La suppression a échoué.");

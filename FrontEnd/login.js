@@ -1,9 +1,11 @@
+// Activer (true) ou désactiver (false) les logs développeur
+const DEBUG = true;
 /* script d'authentification avec mail et mdp*/
 
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("authToken");
     if (token) {
-        console.log("Token présent (login.html) :", token);
+        if (DEBUG) console.log("Token présent (login.html) :", token);
     }
 
     const form = document.querySelector(".login-form");
@@ -26,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (response.ok) {
                     localStorage.setItem("authToken", data.token);
-                    console.log("Token stocké :", data.token); // affiché une seule fois
+                    if (DEBUG) console.log("Token stocké :", data.token); // affiché une seule fois
                     window.location.href = "index.html";
                 } else {
                     document.querySelector(".error-message").textContent = "Identifiant ou mot de passe invalide.";

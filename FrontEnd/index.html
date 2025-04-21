@@ -92,7 +92,38 @@
 				</button> <!-- Ajout bouton retour sur la page 2 -->
 				<h3>Ajout photo</h3>
 			  </div>
-		  <p>Test deuxième page de la modale :Ajout photo et formulaire</p>
+			  <form class="form-ajout-photo">
+				<!-- Champ image avec zone d'aperçu -->
+				<label for="image" class="image-preview-container">
+				  <input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden>
+				  <div class="image-placeholder">
+					<i class="fa-regular fa-image"></i>
+					<span>+ Ajouter photo</span>
+					<p>jpg, png : 4mo max</p>
+				  </div>
+				  <img id="image-preview" class="hidden" />
+				</label>
+			  
+				<!-- Champ titre -->
+				<label for="title">Titre</label>
+				<input type="text" id="title" name="title" placeholder="Titre du projet">
+			  
+				<!-- Champ catégorie -->
+				<!-- <label for="category">Catégorie</label>
+				<select id="category" name="category">
+				  <option value="">-- Choisir une catégorie --</option>
+				</select> -->
+			     <!-- Champ catégorie avec icône Font Awesome -->
+				<label for="category">Catégorie</label>
+				<div class="select-wrapper">
+  				<select id="category" name="category">
+    			<option value="">-- Choisir une catégorie --</option>
+  				</select>
+  <i class="fa-solid fa-chevron-down icon-chevron"></i>
+</div>
+				<!-- Bouton de validation -->
+				<button type="submit" class="btn-valider" disabled>Valider</button>
+			  </form>
 		</div>
 	  </div>
 	</div>

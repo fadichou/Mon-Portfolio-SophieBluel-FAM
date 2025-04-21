@@ -7,7 +7,7 @@
 //             return response.json();
 //         })
 //         .then(data => {
-//             if (DEBUG) console.log("Données récupérées :", data);
+//            console.log("Données récupérées :", data);
 //             allWorks = data; // Stocker les travaux pour les filtres
 //             displayWorks(data); // Afficher les travaux sur la page d'acceuil
 //             afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
@@ -18,6 +18,7 @@
 
 // Activer (true) ou désactiver (false) les logs développeur
 const DEBUG = true;
+if (!DEBUG) console.log=function (){} // si debug=true, !debug à false, on ne rentre pas dans le if. si debug=false, !debug à true, on execute le if.
 
 // Fonction pour afficher dynamiquement les travaux dans la galerie
 function displayWorks(projets) {
@@ -28,10 +29,10 @@ function displayWorks(projets) {
     }
     gallery.innerHTML = ""; // Nettoie la galerie avant d'ajouter les projets
 
-    if (DEBUG) console.log("Affichage des travaux..."); // Vérification
+    console.log("Affichage des travaux..."); // Vérification
 
     projets.forEach(projet => {
-        if (DEBUG) console.log("Ajout du projet :", projet.title, "URL:", projet.imageUrl); //images, titre et image url venant de API backend get/api/works
+        console.log("Ajout du projet :", projet.title, "URL:", projet.imageUrl); //images, titre et image url venant de API backend get/api/works
 
         const figure = document.createElement("figure");
         figure.setAttribute("data-id", projet.id);
@@ -49,7 +50,7 @@ function displayWorks(projets) {
         gallery.appendChild(figure);
     });
 
-    if (DEBUG) console.log("Tous les travaux ont été ajoutés!");
+    console.log("Tous les travaux ont été ajoutés!");
 }
 // Fonction pour générer dynamiquement les boutons de filtre
 function generateFilters(works) {
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let modifierBtn; // declaration variable vide
     const token = localStorage.getItem("authToken"); //Vérifier si l'user est connecté
     if (token) {
-        if (DEBUG) console.log("L'utilisateur est connecté : affichage du mode admin"); // token stocké dans localstorage, on ajoute le bandeau noir et le bouton "modifier"
+       console.log("L'utilisateur est connecté : affichage du mode admin"); // token stocké dans localstorage, on ajoute le bandeau noir et le bouton "modifier"
    
         // Création du bandeau noir en haut de page
    const adminBanner = document.createElement("div"); //creation variable adminbanner avec nouvel element div pour icone crayon et texte mode edition
@@ -220,7 +221,7 @@ window.addEventListener("click", (event) => {
 
 // Fermer la modale en cliquant sur la touche Esc
 window.addEventListener("keydown", (e) => { // lorsqu'on appuie sur la touche Esc
-    if (DEBUG) console.log("Touche appuyée :", e.key);
+  console.log("Touche appuyée :", e.key);
     if (e.key === "Escape") {
         modal.classList.add("hidden");
     }
@@ -295,7 +296,7 @@ btnConfirmer.addEventListener("click", () => {
                 return response.json();
             })
             .then(data => {
-                if (DEBUG) console.log("Données récupérées :", data);
+                console.log("Données récupérées :", data);
                 allWorks = data; // Stocker les travaux pour les filtres
                 displayWorks(data); // Afficher les travaux sur la page d'acceuil
                 afficherWorksModalep1(data);  // Afficher les travaux à la page1 de la modale
@@ -323,7 +324,7 @@ btnConfirmer.addEventListener("click", () => {
             const vignetteAccueil = document.querySelector(`[data-id='${id}']`);
             if (vignetteAccueil) {
             vignetteAccueil.remove();
-            if (DEBUG) console.log(`Projet avec l'ID ${id} supprimé avec succès.`);
+            console.log(`Projet avec l'ID ${id} supprimé avec succès.`);
             }
             } else {
               alert("La suppression a échoué.");
@@ -333,4 +334,45 @@ btnConfirmer.addEventListener("click", () => {
             console.error("Erreur lors de la suppression :", error);
           });
       }
+      //Charger dynamiquement les catégories depuis l’API pour P2 modale
+      chargerCategories(); // Appel pour charger les catégories
+      function chargerCategories() {
+        fetch("http://localhost:5678/api/categories")
+          .then(response => response.json())
+          .then(categories => {
+            const select = document.getElementById("category");
+            if (!select) return;
+      
+            // Vider les options précédentes sauf la première
+            select.innerHTML = `<option value=""> Choisir une catégorie </option>`;
+            categories.forEach(categorie => {
+              const option = document.createElement("option");
+              option.value = categorie.id;
+              option.textContent = categorie.name;
+              select.appendChild(option);
+            });
+      
+            if (DEBUG) console.log("Catégories chargées :", categories);
+          })
+          .catch(error => {
+            console.error("Erreur lors du chargement des catégories :", error);
+          });
+      }
+      const inputImage = document.getElementById("image");
+const imagePreview = document.getElementById("image-preview");
+const placeholder = document.querySelector(".image-placeholder");
+
+inputImage.addEventListener("change", () => {
+  const file = inputImage.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = "block";
+      placeholder.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  }
+});
+     
 });

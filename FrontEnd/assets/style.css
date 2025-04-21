@@ -437,7 +437,8 @@ html {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 1rem;
+	margin-bottom: 5px;
+	padding:10px;
   }
   
   
@@ -568,4 +569,141 @@ html {
   /* Cachée par défaut */
   .hidden {
 	display: none;
+  }
+  /*Style pour preview image P2 Modale*/
+  .image-preview-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #e8f1f6;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 420px;
+	height: 180px;
+	margin: 0 auto 20px auto;
+	cursor: pointer;
+	overflow: hidden;
+	position: relative;
+  }
+  
+  .image-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	color: #4e4e4e;
+	font-size: 14px;
+  }
+  
+  .image-placeholder i {
+	font-size: 60px;
+	color: #b9c5cc;
+  }
+  
+  .image-placeholder span {
+	background-color: #cbd6dc;
+	color: #306685;
+	font-weight: 600;
+	padding: 8px 16px;
+	border-radius: 25px;
+	font-size: 14px;
+  }
+  
+  .image-placeholder p {
+	font-size: 12px;
+	color: #6d6d6d;
+  }
+  
+  #image-preview {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+  }
+  /*Styles pour les champs input et select P2 Modale*/
+  .form-ajout-photo label {
+	width: 100%;
+	max-width: 420px;
+	text-align: left;
+	font-weight: 600;
+	padding: 5px;
+	font-size: 14px;
+	color: #3d3d3d;
+  }
+  .form-ajout-photo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+  }
+  .form-ajout-photo input[type="text"],
+  .form-ajout-photo select {
+	width: 100%;
+	max-width: 420px;
+	height: 40px;
+	padding: 8px 12px;
+	font-size: 14px;
+	border: 1px solid #cbd6dc;
+	border-radius: 5px;
+	background-color: #ffffff;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+  }
+
+  .select-wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 420px;
+	margin-bottom: 20px;
+  }
+  
+  .select-wrapper select {
+	width: 100%;
+	height: 40px;
+	padding: 8px 12px;
+	padding-right: 40px;
+	font-size: 14px;
+	border: 1px solid #cbd6dc;
+	border-radius: 5px;
+	background-color: #ffffff;
+	appearance: none;
+	box-sizing: border-box;
+  }
+  
+  .select-wrapper .icon-chevron {
+	position: absolute;
+	right: 12px;
+	top: 35%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: #333;
+	font-size: 12px;
+  }
+/*bouton Valider de P2 Modale*/
+  .btn-valider {
+	background-color: #1d6154;
+	color: white;
+	border: none;
+	border-radius: 60px;
+	padding: 10px 24px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	width: 237px;
+	margin: 30px auto 0 auto;
+	display: block;
+	transition: background-color 0.3s;
+  }
+  
+  .btn-valider:hover {
+	background-color: #144b43;
+  }
+  
+  .btn-valider:disabled {
+	background-color: #a7a7a7;
+	cursor: not-allowed;
   }

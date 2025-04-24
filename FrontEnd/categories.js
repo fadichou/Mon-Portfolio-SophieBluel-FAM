@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 // Activer (true) ou désactiver (false) les logs développeur
-const DEBUG = true;
+const DEBUG = false;
 if (!DEBUG) console.log = function () {}; // si debug=true, !debug à false, on ne rentre pas dans le if. si debug=false, !debug à true, on execute le if.
 let allWorks = []; // Déclaration variable
 
@@ -458,8 +458,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const fichier = document.getElementById("image").files[0];
     const token = localStorage.getItem("authToken");
 
-    // verification pour eviter doublon d'images déja présentes (name.png)
-
     const formData = new FormData();
     formData.append("title", titre);
     formData.append("category", categorie);
@@ -489,11 +487,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Réinitialiser le formulaire
         reinitialiserModale();
-
-        // Fermer la modale après 2 secondes
-        setTimeout(() => {
-          document.querySelector(".modal").classList.add("hidden");
-        }, 2000);
       })
 
       .catch((error) => {

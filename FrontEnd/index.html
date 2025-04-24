@@ -116,20 +116,21 @@
             </div>
             <form class="form-ajout-photo">
               <!-- Champ image avec zone d'aperçu -->
-              <label for="image" class="image-preview-container"></label>
-              <input
-                type="file"
-                id="image"
-                name="image"
-                accept="image/png, image/jpeg"
-                hidden
-              />
-              <div class="image-placeholder">
-                <i class="fa-regular fa-image"></i>
-                <span>+ Ajouter photo</span>
-                <p>jpg, png : 4mo max</p>
-              </div>
-              <img id="image-preview" class="hidden" src="#" alt="" />
+              <label for="image" class="image-preview-container">
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  accept="image/png, image/jpeg"
+                  hidden
+                />
+                <div class="image-placeholder">
+                  <i class="fa-regular fa-image"></i>
+                  <span>+ Ajouter photo</span>
+                  <p>jpg, png : 4mo max</p>
+                </div>
+                <img id="image-preview" class="hidden" src="#" alt="" />
+              </label>
 
               <!-- Champ titre -->
               <label for="title">Titre</label>

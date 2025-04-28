@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // FormData pour envoi des fihciers images
+    // FormData pour envoi des fichiers images
     envoyerNouveauProjet(); // Appel de la fonction juste après validation des champs
   });
   function reinitialiserModale() {

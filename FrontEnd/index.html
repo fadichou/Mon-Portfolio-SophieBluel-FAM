@@ -23,12 +23,13 @@
       <nav>
         <!-- Menu Navigation en haut à droite de la page -->
         <ul>
-          <li><a href="#portfolio">projets</a></li>
           <!-- Projet du menu de navigation cliquable -->
-          <li><a href="#contact">contact</a></li>
+          <li><a href="#portfolio">projets</a></li>
           <!-- Contact du menu de navigation cliquable -->
-          <li><a href="login.html">login</a></li>
+          <li><a href="#contact">contact</a></li>
           <!-- Ajout lien vers login.html -->
+          <li><a href="login.html">login</a></li>
+          <!-- Pictot Instagram -->
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -59,7 +60,6 @@
         </article>
       </section>
       <section id="portfolio">
-        <!-- <div class="portfolio-header"> -->
         <h2>Mes Projets</h2>
         <!-- Ajout dynamique grace a javascript -->
         <div class="gallery"></div>
@@ -91,17 +91,16 @@
         <span class="close-modal">&times;</span>
 
         <div class="modal-body-page">
-          <!-- Modale Première page : contenu galerie à compléter plus tard  -->
           <div class="gallery-modal-page1">
             <h3>Galerie photo</h3>
+            <!-- pour injecter les projets dynamiquement en miniature -->
             <div class="projets-modale-page1"></div>
-            <!--pour injecter les projets dynamiquement en miniature -->
             <!-- Barre de séparation sur la page 1 de la modale-->
             <hr class="ligne-hori-modale" />
             <button class="form-btn-open">Ajouter une photo</button>
           </div>
 
-          <!-- Modale Deuxième page : Ajout photo et formulaire à compléter plus tard -->
+          <!-- Modale Deuxième page-->
           <div class="form-modal-page2 hidden">
             <div class="header-modal">
               <button
@@ -109,9 +108,8 @@
                 aria-label="Retour à la modale galerie"
               >
                 <i class="fa-solid fa-arrow-left"></i>
-                <!-- fleche retour -->
+                <!-- Ajout fleche retour -->
               </button>
-              <!-- Ajout bouton retour sur la page 2 -->
               <h3>Ajout photo</h3>
             </div>
             <form class="form-ajout-photo">
